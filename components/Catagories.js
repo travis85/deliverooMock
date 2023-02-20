@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, ScrollView } from 'react-native'
 import CatagoryCard from './CatagoryCard'
 import sanityClient, { urlFor } from '../sanity'
+
+
 export default function Catagories() {
   const [categories, setCategories] = useState([])
 
@@ -11,8 +13,8 @@ export default function Catagories() {
     `).then((data) => {
       setCategories(data)
     })
-  },[])
-console.log(categories)
+  }, [])
+  
   return (
     <ScrollView
         contentContainerStyle={{
