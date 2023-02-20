@@ -40,18 +40,18 @@ export default function FeaturedRow({ id, title, description }) {
         {restaurants?.map((restaurant) => {
           return (
             <ResturantCard
-            key={restaurant._id}
-            id={restaurant._id}
-            imgUrl={restaurant.image}
-            title={restaurant.name}
-            rating={restaurant.rating}
-            genre={restaurant.type?.name}
-            address={restaurant.address}
-            short_description={restaurant.short_description}
-            dishes={restaurant.dishes}
-            long={restaurant.long}
-            lat={restaurant.lat}
-          />    
+              key={restaurant._id}
+              id={restaurant._id}
+              imgUrl={restaurant.image}
+              title={restaurant.name}
+              rating={restaurant.rating}
+              genre={restaurant.type?.name}
+              address={restaurant.address}
+              short_description={restaurant.short_description}
+              dishes={restaurant.dishes}
+              long={restaurant.long}
+              lat={restaurant.lat}
+            />    
           )
           
         })}
