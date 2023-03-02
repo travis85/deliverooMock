@@ -6,12 +6,29 @@ import { ChevronDownIcon, UserIcon, AdjustmentsHorizontalIcon, MagnifyingGlassIc
 import Catagories from '../components/Catagories';
 import FeaturedRow from '../components/FeaturedRow'
 import sanityClient from "../sanity"
-// https://www.youtube.com/watch?v=AkEnidfZnCU&t=21s
-
+import ResturantCard from '../components/ResturantCard';
 
 export default function HomeScreen() {
     const navigation = useNavigation()
+    const [search, setSearch] = useState('')
     const [featuredCatagories, setFeaturedCatagories] = useState([])
+    const [filteredSearch, setFilteredSearch] = useState([])
+
+    const searchFilterFunction = (text) => {
+        const restaurantArray = featuredCatagories[1].restaurants
+        if (text) {
+            const newData = restaurantArray.filter((restaurant) => {
+                const searchData = restaurant.name ? restaurant.name.toUpperCase() : ''.toUpperCase();
+                const textData = text.toUpperCase();
+                return searchData.indexOf(textData) > -1; //returns true or false
+            });
+            setFilteredSearch(newData);
+            setSearch('');
+        } else {
+            setFilteredSearch([]);
+            setSearch('');
+        }
+    };
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -31,8 +48,9 @@ export default function HomeScreen() {
         ).then(data => {
             setFeaturedCatagories(data)
         });
-    }, []);
-
+    },[search]);
+    
+   
     return (
         <SafeAreaView className='bg-white pt-5'>
             
@@ -53,34 +71,51 @@ export default function HomeScreen() {
                 <UserIcon size={35}  color='#00CCBB' />  
             </View>  
         
-        
             {/* SEARCH BAR */}
             <View className='flex-row items-center space-x-2 pb-2 mx-4'>
                 <View className='flex-row flex-1 space-x-2 bg-gray-200 p-3'>
                     <MagnifyingGlassIcon color='gray' size={20}/>
-                    < TextInput placeholder='Resturants and Cuisines'/>
+                    < TextInput
+                        onChangeText={(text) => setSearch(text)}
+                        onSubmitEditing={()=>searchFilterFunction(search)}
+                        placeholder='Resturants and Cuisines'
+                    />
                 </View>
                 < AdjustmentsHorizontalIcon color='#00CCBB' />
             </View>
 
             {/* BODY */}
-            <ScrollView className=''>
-                <Catagories />
-
-                {/* FEATURED ROW */}
-                {featuredCatagories.map((category) => (
-                    < FeaturedRow
-                        key={category._id}
-                        id= {category._id}
-                        title= {category.name}
-                        description={category.short_description}
-                    />
-                ))}
+            
+            <ScrollView>
                 
-               
-               
+                <Catagories />
+                { filteredSearch.length < 1 ?
+                    /* FEATURED ROW */ 
+                    featuredCatagories?.map((category) => (
+                        < FeaturedRow
+                            key={category._id}
+                            id= {category._id}
+                            title= {category.name}
+                            description={category.short_description}
+                        />
+                    )) :
+                    filteredSearch?.map((restaurant) => (
+                        <ResturantCard
+                            key={restaurant._id}
+                            id={restaurant._id}
+                            imgUrl={restaurant.image}
+                            title={restaurant.name}
+                            rating={restaurant.rating}
+                            genre={restaurant.type?.name}
+                            address={restaurant.address}
+                            short_description={restaurant.short_description}
+                            dishes={restaurant.dishes}
+                            long={restaurant.long}
+                            lat={restaurant.lat}
+                        />    
+                    ))
+                }
             </ScrollView>
         </SafeAreaView>
-    
     )
 }
