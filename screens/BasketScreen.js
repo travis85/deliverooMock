@@ -16,6 +16,7 @@ export default function BasketScreen() {
   const dispatch = useDispatch()
   const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([])
   const basketTotal = useSelector(selectBasketTotal)
+  
   useEffect(() => {
     //REDUCING ALL ITMES IN BASKET INTO A GROUPED OBJECT
     const groupedItems = items.reduce((results, item) => {

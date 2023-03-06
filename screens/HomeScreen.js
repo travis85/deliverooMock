@@ -3,7 +3,7 @@ import { Text, View, Image, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChevronDownIcon, UserIcon, AdjustmentsHorizontalIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
-import Catagories from '../components/Catagories';
+import Categories from '../components/Categories';
 import FeaturedRow from '../components/FeaturedRow'
 import sanityClient from "../sanity"
 import ResturantCard from '../components/ResturantCard';
@@ -48,7 +48,7 @@ export default function HomeScreen() {
         ).then(data => {
             setFeaturedCatagories(data)
         });
-    },[search]);
+    },[]);
     
    
     return (
@@ -88,7 +88,8 @@ export default function HomeScreen() {
             
             <ScrollView>
                 
-                <Catagories />
+                <Categories />
+
                 { filteredSearch.length < 1 ?
                     /* FEATURED ROW */ 
                     featuredCatagories?.map((category) => (

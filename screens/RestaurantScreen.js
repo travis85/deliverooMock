@@ -43,8 +43,8 @@ export default function RestaurantScreen() {
                 lat
             })
         )
-    },[dispatch])
-
+    }, [dispatch])
+    
     //HIDES HEADER ON PAGE LOAD
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -98,8 +98,7 @@ export default function RestaurantScreen() {
             <View className='pb-36'>
                 <Text className='px-4 pt-6 mb-3 font-bold text-xl'>Menu</Text>
                 {/* DishRows  */}
-                {dishes.map((dish) => {
-                    return (
+                    {dishes.map((dish) => (
                         <DishRow
                             key={dish._id}
                             id={dish._id}
@@ -108,8 +107,7 @@ export default function RestaurantScreen() {
                             price={dish.price}
                             image={dish.image}
                         />
-                    )
-                })}
+                    ))}
             </View>   
         </ScrollView>
         </>

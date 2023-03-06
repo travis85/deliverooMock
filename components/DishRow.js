@@ -8,10 +8,13 @@ import { addToBasket, selectBasketItemsWithId, removeFromBasket } from '../featu
 export default function DishRow({ id, name, description, price, image }) {
   const [isPressed, setIsPressed] = useState(false)
   const dispatch = useDispatch()
+  
   const items = useSelector((state) => selectBasketItemsWithId(state, id))
+  
   const addItemToBasket = () => {
     dispatch(addToBasket({id, name, description, price, image}))
   }
+
   const removeItemFromBasket = () => {
     if( !items.length > 0 ) return
     dispatch(removeFromBasket({ id }))

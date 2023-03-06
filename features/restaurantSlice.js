@@ -15,11 +15,11 @@ const initialState = {
 }
 //THIS SLICE IS USED TO GATHER ALL RESTAURANT INFO FROM HOME PAGE
 export const restaurantSlice = createSlice({
-  name: 'restaurant',
-  initialState,
-  reducers: {
-      setRestaurant: (state, action) => {
-          state.restaurant = action.payload
+    name: 'restaurant',
+    initialState,
+    reducers: {
+        setRestaurant: (state, action) => {
+            state.restaurant = action.payload
         }
     },
   
@@ -29,5 +29,4 @@ export const restaurantSlice = createSlice({
 
 export const { setRestaurant } = restaurantSlice.actions;
 export const selectRestaurant = (state) => state.restaurant.restaurant;
-
 export default restaurantSlice.reducer
