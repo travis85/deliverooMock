@@ -15,6 +15,16 @@ export default defineType({
       name: "image",
       type: "image",
       title: "Image of category"
+    },
+    { 
+      name: "restaurants",
+      type: "array",
+      title: "Restaurants",
+      of: [{
+        type: "reference", to: [{
+          type: "restaurant"
+        }]
+      }]
     }
   ],
 })
