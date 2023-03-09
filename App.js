@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
@@ -9,6 +8,7 @@ import { store } from './store';
 import { Provider } from 'react-redux'
 import PreparingOrderScreen from './screens/PreparingOrderScreen';
 import DeliveryScreen from './screens/DeliveryScreen';
+import CategoryScreen from './screens/CategoryScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +19,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="RestaurantScreen" component={RestaurantScreen} />
+          <Stack.Screen name="CategoryScreen" component={CategoryScreen}/>
           <Stack.Screen
             name="Basket"
             component={BasketScreen}
